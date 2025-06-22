@@ -1,0 +1,11 @@
+Idea del Juego: "Fantasmas en la Escuela"
+
+El juego se basa en la historia de un alumno que ingresa a su escuela durante la noche. En noches de luna llena, los fantasmas de los antiguos profesores, que solían enseñar en esa escuela, salen a recorrer los pasillos. Al enterarse de esto, el alumno intenta escapar, pero ya es tarde.
+
+Los fantasmas lo obligan a responder preguntas relacionadas con las materias que ellos enseñaban. Para llegar al final y ganar el juego, el alumno deberá responder correctamente casi todas las preguntas. Si falla en 5 preguntas, sonarán las alarmas del colegio, lo que atraerá a la policía y resultará en la expulsión inmediata del alumno.
+
+La jugabilidad en consola consiste en que el juego presenta preguntas de manera aleatoria, con 4 opciones de respuesta, y con tres niveles de dificultad: fácil, medio y difícil. Estas preguntas pertenecen a distintas áreas de conocimiento, como informática, geografía, historia, entre otras.
+
+El sistema de puntuación se basa en la dificultad de las preguntas: responder correctamente preguntas difíciles otorga más puntos que las fáciles. Además, hay un temporizador que, al final del juego, suma puntos dependiendo del tiempo empleado: cuanto menos tiempo tome el jugador, más puntos obtendrá; si tarda mucho, recibirá menos puntos.
+
+El juego también incluye otra modalidad especial: el profesor fantasma presenta un anagrama (una palabra con las letras desordenadas), y el jugador debe formar la palabra correcta clickeando las letras en el orden adecuado. El jugador tiene 3 intentos para resolver cada anagrama; si falla en todos, pierde automáticamente esa ronda.
