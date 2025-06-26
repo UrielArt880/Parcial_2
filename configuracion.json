@@ -1,0 +1,9 @@
+{
+
+    cantidad_preguntas : 30,
+    tiempo_limite : 300,
+    accesibilidad: False
+    musica : True,
+    dificultad: "facil"
+
+}
