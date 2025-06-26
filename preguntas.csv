@@ -1,0 +1,8 @@
+categoria,dificultad,pregunta,opcion_a,opcion_b,opcion_c,opcion_d,respuesta,puntos
+Matemática,Fácil,¿Cuánto es 7 x 6?,42,36,48,30,A,10
+Historia,Media,¿En qué año fue la Revolución de Mayo?,1816,1810,1820,1806,B,20
+Lengua,Fácil,¿Cuál es el sustantivo en 'El perro corre rápido'?,corre,rápido,perro,El,C,10
+Geografía,Media,¿Cuál es el país más grande del mundo?,China,Canadá,Estados Unidos,Rusia,D,20
+Ciencias Naturales,Difícil,¿Cuál es el símbolo químico del oro?,Ag,Au,Hg,Fe,B,30
+Educación Física,Media,¿Cuántos jugadores hay en un equipo de vóley?,6,5,7,11,A,20
+Informática,Difícil,¿Qué significa 'CPU'?,Central Process Unit,Control Processing Unit,Central Processing Unit,Computer Primary Unit,C,30

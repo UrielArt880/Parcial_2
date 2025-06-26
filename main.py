@@ -1,13 +1,34 @@
 import random
-from questions import preguntas
-# ----- Preguntas -----
+import re
 
-# ----- Configuración de puntaje -----
-valores_dificultad = {
-    "Fácil": 10,
-    "Media": 20,
-    "Difícil": 30
-}
+def cargar_preguntas():
+    lista_preguntas = []
+    with open("preguntas.csv", "r", encoding="utf-8") as archivo:
+        lineas = archivo.readlines()
+        lineas = lineas[1:]  # Saltear la primera línea (encabezados)
+
+        for linea in lineas:
+            elemento = re.split(",|\n", linea)  # Quita \n y separa por coma
+
+            pregunta = {
+                "categoria": elemento[0],
+                "dificultad": elemento[1],
+                "pregunta": elemento[2],
+                "opciones": [
+                    f"A) {elemento[3]}",
+                    f"B) {elemento[4]}",
+                    f"C) {elemento[5]}",
+                    f"D) {elemento[6]}"
+                ],
+                "respuesta": elemento[7].upper(),
+                "puntaje": elemento[8]
+            }
+
+            lista_preguntas.append(pregunta)
+
+    return lista_preguntas
+
+preguntas = cargar_preguntas()
 
 # ----- Funciones -----
 
@@ -24,11 +45,6 @@ def mostrar_pregunta(pregunta, numero):
     print(pregunta["pregunta"])
     for opcion in pregunta["opciones"]:
         print(opcion)
-
-def obtener_puntaje(dificultad):
-    for dif in valores_dificultad:
-        if dificultad == dif:
-            return valores_dificultad[dificultad]
 
 def procesar_respuesta(respuesta_usuario, respuesta_correcta):
     correcto = False
@@ -61,7 +77,7 @@ def jugar_trivia(preguntas, max_sanciones):
         respuesta = input("Elegí tu respuesta (A, B, C o D): ")
 
         if procesar_respuesta(respuesta, pregunta["respuesta"]):
-            puntos = obtener_puntaje(pregunta["dificultad"])
+            puntos = int(pregunta["puntaje"])
             puntaje += puntos
             print("✅ ¡Correcto! Sumás", puntos, "puntos.")
         else:
