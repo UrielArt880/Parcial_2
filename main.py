@@ -1,63 +1,34 @@
 import random
+import re
 
-preguntas = [
-    {
-        "categoria": "Matemática",
-        "dificultad": "Fácil",
-        "pregunta": "¿Cuánto es 7 x 6?",
-        "opciones": ["A) 42", "B) 36", "C) 48", "D) 30"],
-        "respuesta": "A"
-    },
-    {
-        "categoria": "Historia",
-        "dificultad": "Media",
-        "pregunta": "¿En qué año fue la Revolución de Mayo?",
-        "opciones": ["A) 1816", "B) 1810", "C) 1820", "D) 1806"],
-        "respuesta": "B"
-    },
-    {
-        "categoria": "Lengua",
-        "dificultad": "Fácil",
-        "pregunta": "¿Cuál es el sustantivo en la oración: 'El perro corre rápido'?",
-        "opciones": ["A) corre", "B) rápido", "C) perro", "D) El"],
-        "respuesta": "C"
-    },
-    {
-        "categoria": "Geografía",
-        "dificultad": "Media",
-        "pregunta": "¿Cuál es el país más grande del mundo?",
-        "opciones": ["A) China", "B) Canadá", "C) Estados Unidos", "D) Rusia"],
-        "respuesta": "D"
-    },
-    {
-        "categoria": "Ciencias Naturales",
-        "dificultad": "Difícil",
-        "pregunta": "¿Cuál es el símbolo químico del oro?",
-        "opciones": ["A) Ag", "B) Au", "C) Hg", "D) Fe"],
-        "respuesta": "B"
-    },
-    {
-        "categoria": "Educación Física",
-        "dificultad": "Media",
-        "pregunta": "¿Cuántos jugadores hay en un equipo de vóley?",
-        "opciones": ["A) 6", "B) 5", "C) 7", "D) 11"],
-        "respuesta": "A"
-    },
-    {
-        "categoria": "Informática",
-        "dificultad": "Difícil",
-        "pregunta": "¿Qué significa 'CPU'?",
-        "opciones": ["A) Central Process Unit", "B) Control Processing Unit", "C) Central Processing Unit", "D) Computer Primary Unit"],
-        "respuesta": "C"
-    }
-]
+def cargar_preguntas():
+    lista_preguntas = []
+    with open("preguntas.csv", "r", encoding="utf-8") as archivo:
+        lineas = archivo.readlines()
+        lineas = lineas[1:]  # Saltear la primera línea (encabezados)
 
-# ----- Configuración de puntaje -----
-valores_dificultad = {
-    "Fácil": 10,
-    "Media": 20,
-    "Difícil": 30
-}
+        for linea in lineas:
+            elemento = re.split(",|\n", linea)  # Quita \n y separa por coma
+
+            pregunta = {
+                "categoria": elemento[0],
+                "dificultad": elemento[1],
+                "pregunta": elemento[2],
+                "opciones": [
+                    f"A) {elemento[3]}",
+                    f"B) {elemento[4]}",
+                    f"C) {elemento[5]}",
+                    f"D) {elemento[6]}"
+                ],
+                "respuesta": elemento[7].upper(),
+                "puntaje": elemento[8]
+            }
+
+            lista_preguntas.append(pregunta)
+
+    return lista_preguntas
+
+preguntas = cargar_preguntas()
 
 # ----- Funciones -----
 
@@ -75,11 +46,11 @@ def mostrar_pregunta(pregunta, numero):
     for opcion in pregunta["opciones"]:
         print(opcion)
 
-def obtener_puntaje(dificultad):
-    return valores_dificultad.get(dificultad, 0)
-
 def procesar_respuesta(respuesta_usuario, respuesta_correcta):
-    return respuesta_usuario == respuesta_correcta
+    correcto = False
+    if respuesta_usuario == respuesta_correcta:
+        correcto = True
+    return correcto
 
 def mostrar_resultado_final(puntaje, sanciones, max_sanciones):
     print("\n📋 Resultado Final:")
@@ -94,15 +65,19 @@ def jugar_trivia(preguntas, max_sanciones):
     puntaje = 0
     sanciones = 0
     numero_pregunta = 1
-
+    max_preguntas = 10
+    
     random.shuffle(preguntas)
 
     for pregunta in preguntas:
+        if numero_pregunta > max_preguntas:
+            break
+        
         mostrar_pregunta(pregunta, numero_pregunta)
-        respuesta = input("Elegí tu respuesta (A, B, C o D): ").upper()
+        respuesta = input("Elegí tu respuesta (A, B, C o D): ")
 
         if procesar_respuesta(respuesta, pregunta["respuesta"]):
-            puntos = obtener_puntaje(pregunta["dificultad"])
+            puntos = int(pregunta["puntaje"])
             puntaje += puntos
             print("✅ ¡Correcto! Sumás", puntos, "puntos.")
         else:
